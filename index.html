@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =====================================================================
+       THE BLISS CAKKERY — Cute UI v3 (Cupcake Sky)
+       New visual style: rounded candy panels, floating cupcake sprites,
+       soft indigo night + peach cream palette. Fully responsive with Tailwind.
+       ===================================================================== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Bliss Cakkery — Where Every Bite Brings Bliss</title>
+  <meta name="description" content="Premium 100% eggless cakes, brownies, cookies, tiramisu & hampers. Crafted fresh in New Delhi. Every bite is pure bliss." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600;700;800&family=Sacramento&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: "#0E1633",
+            indigoDeep: "#171F49",
+            indigoSoft: "#202B6B",
+            peach: "#FFC4A4",
+            tangerine: "#FF8A4C",
+            cream: "#FFF7EC",
+            sugar: "#FFE9D6",
+            blush: "#FFD7C6",
+          },
+          fontFamily: {
+            sans: ["Quicksand", "system-ui", "sans-serif"],
+            display: ["Playfair Display", "serif"],
+            script: ["Sacramento", "cursive"],
+          },
+          boxShadow: {
+            candy: "0 16px 48px rgba(255,138,76,.35)",
+            soft: "0 24px 60px rgba(14,22,51,.55)",
+            halo: "0 0 0 10px rgba(255,196,164,.15)",
+          },
+          backgroundImage: {
+            heroGrad: "radial-gradient(60% 80% at 10% 10%, rgba(255,196,164,.18) 0%, transparent 60%), radial-gradient(50% 70% at 100% 0%, rgba(255,138,76,.16) 0%, transparent 60%), linear-gradient(180deg, #0E1633 0%, #161F4A 60%, #10183B 100%)",
+            paper: "radial-gradient(circle at 30% 0%, rgba(255,196,164,.10), transparent 50%), radial-gradient(circle at 80% 90%, rgba(255,138,76,.08), transparent 40%)",
+            dots: "radial-gradient(circle at 1px 1px, rgba(255,255,255,.14) 1px, transparent 1px)",
+          },
+          keyframes: {
+            bubbleY: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10px)" } },
+            floatX: { "0%,100%": { transform: "translateX(0)" }, "50%": { transform: "translateX(14px)" } },
+            shimmer: { "0%": { backgroundPosition: "-200% 0" }, "100%": { backgroundPosition: "200% 0" } },
+            fadeUp: { "0%": { opacity: 0, transform:"translateY(20px)" }, "100%": { opacity:1, transform:"translateY(0)" } },
+            marquee: { "0%": { transform:"translateX(0)" }, "100%": { transform:"translateX(-50%)" } }
+          },
+          animation: {
+            bubbleY: "bubbleY 8s ease-in-out infinite",
+            floatX: "floatX 12s ease-in-out infinite",
+            shimmer: "shimmer 2.2s linear infinite",
+            fadeUp: "fadeUp .9s ease both",
+            marquee: "marquee 26s linear infinite",
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom style -->
+  <style>
+    :root{ --grid: 28px; }
+    html{ scroll-behavior:smooth }
+    body{ background:#0E1633; color:#f4f6ff }
+    .veil{ backdrop-filter: blur(12px); background: rgba(14,22,51,.72); border-bottom: 1px solid rgba(255,255,255,.08) }
+    .veil.scrolled{ box-shadow: 0 16px 40px rgba(0,0,0,.35) }
+    .gridbg{ background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 1px); background-size: var(--grid) var(--grid) }
+    .sa{ opacity:0; transform: translateY(18px); transition: all .9s cubic-bezier(.2,.8,.2,1) }
+    .sa.in{ opacity:1; transform:none }
+    .btn{ position:relative; overflow:hidden }
+    .btn::after{ content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transform: translateX(-100%) }
+    .btn:hover::after{ animation: shimmer 1.4s linear }
+    /* Mobile menu */
+    #mobileNav{ max-height:0; opacity:0; overflow:hidden; transition: all .35s ease }
+    #mobileNav.open{ max-height:560px; opacity:1 }
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .animate-bubbleY,.animate-floatX,.animate-marquee{ animation: none !important }
+      .btn::after{ display:none }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- =========================================================
+       Floating Talentronaut promo (big, cute)
+       ========================================================= -->
+  <!-- Floating Promo: Talentronaut (with centered logo image) -->
+<a href="https://www.talentronaut.in/" target="_blank" aria-label="Talentronaut Technologies"
+   class="group fixed right-5 bottom-5 z-50">
+  <div class="relative isolate">
+    <!-- soft glow -->
+    <div class="absolute -inset-3 rounded-full bg-peach/30 blur-2xl opacity-90 group-hover:opacity-100 transition"></div>
+
+    <!-- button body -->
+    <div class="relative h-[92px] w-[92px] rounded-2xl bg-indigoSoft/90 border border-peach/70 shadow-halo grid place-items-center btn">
+      <!-- animated dashed ring -->
+      <svg class="absolute -z-10 inset-0 m-auto h-[112px] w-[112px] animate-floatX" viewBox="0 0 100 100" fill="none">
+        <defs>
+          <linearGradient id="tg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFC4A4"/>
+            <stop offset="1" stop-color="#FF8A4C"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="48" stroke="url(#tg)" stroke-width="2" stroke-dasharray="8 8"/>
+      </svg>
+
+      <!-- LOGO GOES HERE -->
+      <div class="relative grid place-items-center">
+        <!-- subtle inner glow -->
+        <div class="absolute -inset-2 rounded-xl bg-peach/40 blur-md"></div>
+
+        <!-- image container -->
+        <div class="relative rounded-xl bg-white/5 backdrop-blur p-2 ring-1 ring-white/20">
+          <!-- Replace src with your logo path or URL -->
+          <img
+            src="logo.jpg"
+            alt="Talentronaut logo"
+            class="h-12 w-12 object-contain select-none pointer-events-none"
+            loading="lazy" />
+        </div>
+      </div>
+      <!-- /LOGO -->
+    </div>
+  </div>
+
+  <span class="block text-[11px] mt-2 text-cream/90 text-center">Designed by Talentronaut</span>
+</a>
+
+
+  <!-- Progress bar -->
+  <div id="progress" class="fixed top-0 left-0 h-[3px] w-0 bg-gradient-to-r from-peach via-tangerine to-cream z-40"></div>
+
+  <!-- =========================================================
+       NAV
+       ========================================================= -->
+  <header id="nav" class="veil sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3 group">
+        <!-- Cute cupcake logo (SVG) -->
+        <div class="relative">
+          <div class="absolute -inset-2 rounded-lg bg-peach/40 blur-md"></div>
+          <svg class="relative h-10 w-10" viewBox="0 0 64 64" aria-hidden="true">
+            <defs><linearGradient id="cup" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC4A4"/><stop offset="1" stop-color="#FF8A4C"/></linearGradient></defs>
+            <path d="M14 38c0-7 9-12 18-12s18 5 18 12v10H14V38z" fill="url(#cup)" stroke="#FFE7D4" stroke-width="2"/>
+            <circle cx="32" cy="24" r="7" fill="#FFF7EC" stroke="#FFE7D4" />
+            <path d="M32 16c5-6 13 2 7 7-4 3-7 3-7 3s-3 0-7-3c-6-5 2-13 7-7z" fill="#FFF7EC" stroke="#FFE7D4" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="leading-tight">
+          <div class="font-display text-lg tracking-wide">The Bliss Cakkery</div>
+          <div class="text-[11px] text-peach">Where every bite brings bliss</div>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-[15px]">
+        <a href="#menu" class="hover:text-peach transition">Menu</a>
+        <a href="#about" class="hover:text-peach transition">About</a>
+        <a href="#gallery" class="hover:text-peach transition">Gallery</a>
+        <a href="#order" class="hover:text-peach transition">Order</a>
+        <a href="#contact" class="hover:text-peach transition">Contact</a>
+        <a href="#order" class="btn rounded-full bg-peach text-night px-4 py-2 font-semibold shadow-candy">Order Now</a>
+      </nav>
+
+      <button id="menuBtn" class="md:hidden rounded-lg border border-white/10 px-3 py-2 hover:bg-white/5">Menu</button>
+    </div>
+    <!-- Mobile -->
+    <div id="mobileNav" class="md:hidden bg-indigoSoft border-t border-white/10">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 grid gap-2">
+        <a href="#menu" class="py-2">Menu</a>
+        <a href="#about" class="py-2">About</a>
+        <a href="#gallery" class="py-2">Gallery</a>
+        <a href="#order" class="py-2">Order</a>
+        <a href="#contact" class="py-2">Contact</a>
+        <a href="#order" class="mt-2 btn rounded-lg bg-peach text-night px-4 py-3 text-center font-semibold">Order Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO — Cupcake Sky (canvas sprites behind)
+       ========================================================= -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-heroGrad"></div>
+    <div class="absolute inset-0 gridbg opacity-25"></div>
+
+    <!-- Cupcake canvas animation -->
+    <canvas id="cupcakes" class="absolute inset-0 pointer-events-none"></canvas>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left copy -->
+        <div class="sa">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-[12px] tracking-wider">100% Eggless • Freshly Baked</span>
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-7xl leading-tight mt-3">
+            Cloud-soft <span class="text-peach">Desserts</span> for Happy Hearts
+          </h1>
+          <p class="mt-4 text-cream/90 max-w-xl">
+            Premium cakes, brownies, cookies, tiramisu & hampers—crafted with the finest ingredients and a sprinkle of whimsy.
+            From gifting to celebrations, we bake love into every bite.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#menu" class="btn rounded-full bg-peach text-night px-6 py-3 font-semibold shadow-candy">Explore Menu</a>
+            <a href="#order" class="btn rounded-full border border-peach text-peach px-6 py-3 hover:bg-peach/10">Order Now</a>
+          </div>
+          <!-- Mini points -->
+          <div class="mt-8 grid grid-cols-3 gap-3 sa">
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-2xl font-extrabold text-peach">Eggless</div>
+              <div class="text-xs text-cream/80">Always</div>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-2xl font-extrabold text-peach">Fresh</div>
+              <div class="text-xs text-cream/80">Daily bakes</div>
+            </div>
+            <div class="rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+              <div class="text-2xl font-extrabold text-peach">Gifting</div>
+              <div class="text-xs text-cream/80">Hampers</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right image stack -->
+        <div class="sa">
+          <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-soft">
+            <img class="w-full h-full object-cover aspect-[4/3]" src="cake.jpg" alt="Dessert counter" />
+            <div class="absolute inset-0 bg-gradient-to-tr from-night/40 via-transparent to-night/20"></div>
+            <div class="absolute -bottom-8 left-8">
+              
+            </div>
+          </div>
+          <div class="mt-6 flex items-center gap-4">
+            <svg class="h-14 w-14 animate-bubbleY" viewBox="0 0 120 120" fill="none">
+              <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC4A4"/><stop offset="1" stop-color="#FF8A4C"/></linearGradient></defs>
+              <ellipse cx="60" cy="96" rx="40" ry="10" fill="rgba(0,0,0,.25)"/>
+              <path d="M28 68c0-12 16-20 32-20s32 8 32 20v30H28V68z" fill="url(#g)" stroke="#FFE7D4" stroke-width="3"/>
+              <circle cx="60" cy="44" r="14" fill="#FFF7EC" stroke="#FFE7D4" stroke-width="3"/>
+            </svg>
+            <div>
+              <div class="font-display text-xl">Baked with Love</div>
+              <div class="text-sm text-cream/80">New Delhi • Doorstep Delivery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- marquee -->
+      <div class="mt-10 border-y border-white/10 bg-white/5 backdrop-blur">
+        <div class="overflow-hidden whitespace-nowrap py-3">
+          <div class="animate-marquee inline-block min-w-[200%]">
+            <span class="mx-6 text-cream/80">CAKES • BROWNIES • COOKIES • TIRAMISU • HAMPERS • DESSERT TABLES</span>
+            <span class="mx-6 text-cream/80">CAKES • BROWNIES • COOKIES • TIRAMISU • HAMPERS • DESSERT TABLES</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       MENU
+       ========================================================= -->
+  <section id="menu" class="py-16 md:py-24 relative bg-indigoSoft/40">
+    <div class="absolute inset-0 gridbg opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="sa text-center">
+        <h2 class="font-display text-3xl md:text-4xl">Signature Cuties</h2>
+        <p class="mt-2 text-cream/90">Our most-loved desserts for every mood.</p>
+      </header>
+
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sa">
+        <!-- card template (6 items) -->
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=1600&auto=format&fit=crop" alt="Chocolate cake" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 left-3 bg-peach text-night text-xs px-2 py-1 rounded-full shadow-candy">Bestseller</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Chocolate Truffle Cake</h3>
+            <p class="text-sm text-cream/80 mt-1">Silky ganache & moist layers.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">₹799</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Order</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="brownies.webp" alt="Brownies" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Fudgy Walnut Brownies</h3>
+            <p class="text-sm text-cream/80 mt-1">Crackly tops, gooey centers.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">₹499</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Order</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="cookies.jpg" alt="Cookies" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Choco Chunk Cookies</h3>
+            <p class="text-sm text-cream/80 mt-1">Crispy edges, soft hearts.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">₹349</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Order</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="tiramisu.jpeg" alt="Tiramisu" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Classic Tiramisu (Eggless)</h3>
+            <p class="text-sm text-cream/80 mt-1">Espresso-soaked bliss.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">₹899</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Order</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="cake1.webp" alt="Hampers" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 left-3 bg-peach text-night text-xs px-2 py-1 rounded-full shadow-candy">Gifting</span>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Celebration Hampers</h3>
+            <p class="text-sm text-cream/80 mt-1">Curated treats for every occasion.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">From ₹1299</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Order</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-white/10 bg-white/5 backdrop-blur overflow-hidden shadow-soft group">
+          <div class="relative">
+            <img class="w-full h-48 object-cover group-hover:scale-[1.03] transition" src="cake.jpg" alt="Custom Cake" />
+            <div class="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-semibold text-lg">Custom Cakes & Tables</h3>
+            <p class="text-sm text-cream/80 mt-1">We design your dream centerpiece.</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-peach font-bold">Quote</span>
+              <a href="#order" class="btn text-sm rounded-full border border-peach text-peach px-3 py-1.5 hover:bg-peach/10">Discuss</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ABOUT
+       ========================================================= -->
+  <section id="about" class="py-16 md:py-24 relative">
+    <div class="absolute inset-0 bg-paper opacity-50"></div>
+    <div class="absolute top-10 left-8 w-44 h-44 rounded-full bg-peach/25 blur-3xl animate-bubbleY"></div>
+    <div class="absolute bottom-8 right-8 w-56 h-56 rounded-full bg-tangerine/25 blur-3xl animate-floatX"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+      <div class="sa">
+        <h2 class="font-display text-3xl md:text-4xl">Our Sweet Story</h2>
+        <p class="mt-4 text-cream/90">
+          The Bliss Cakkery is a premium dessert brand specializing in <b>100% eggless</b> cakes, brownies, cookies, tiramisu
+          and hampers. Our mission is to make every bite irresistible—blending rich flavors with aesthetic presentation that
+          creates FOMO and fills your feed with joy.
+        </p>
+        <p class="mt-3 text-cream/80">
+          Whether it’s everyday indulgence or a special celebration, every order is made with love, care and the promise of bliss.
+        </p>
+        <div class="mt-6">
+          <a href="#order" class="btn inline-flex rounded-full bg-peach text-night px-6 py-3 font-semibold shadow-candy">Start Your Order</a>
+        </div>
+      </div>
+
+      <div class="sa">
+        <div class="rounded-[2rem] overflow-hidden border border-white/10 shadow-soft">
+          <img class="w-full h-full object-cover aspect-[4/3]" src="cupcake2.webp" alt="Cupcake platter" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GALLERY
+       ========================================================= -->
+  <section id="gallery" class="py-16 md:py-24 relative bg-indigoSoft/40">
+    <div class="absolute inset-0 gridbg opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="sa text-center">
+        <h2 class="font-display text-3xl md:text-4xl">Blissful Gallery</h2>
+        <p class="mt-2 text-cream/90">Swipe for sweetness.</p>
+      </header>
+
+      <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 sa">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="tiramisu.jpeg" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="cupcake.jpg" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="cake.jpg" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="cookies.jpg" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="cupcake2.webp" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="brownies.webp" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1200&auto=format&fit=crop" alt="">
+        <img class="rounded-xl object-cover h-48 w-full hover:scale-[1.02] transition" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ORDER FORM
+       ========================================================= -->
+  <section id="order" class="relative py-16 md:py-24">
+    <div class="absolute inset-0 bg-heroGrad opacity-65"></div>
+    <div class="absolute inset-0 gridbg opacity-20"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+      <div class="sa">
+        <h2 class="font-display text-3xl md:text-4xl">Ready to Order?</h2>
+        <p class="mt-3 text-cream/90">Delivering across New Delhi & NCR. Freshly baked, packed with love.</p>
+        <ul class="mt-4 text-cream/85 space-y-2">
+          <li>📞 <a class="hover:text-peach" href="tel:+919899985142">+91 98999 85142</a></li>
+          <li>📧 <a class="hover:text-peach" href="mailto:chahatgambhir1611@gmail.com">chahatgambhir1611@gmail.com</a></li>
+          <li>📍 New Delhi, India</li>
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#contact" class="btn rounded-full bg-peach text-night px-6 py-3 font-semibold shadow-candy">Send Enquiry</a>
+          <a href="#menu" class="btn rounded-full border border-white/10 px-6 py-3 hover:bg-white/5">View Menu</a>
+        </div>
+      </div>
+
+      <form class="sa rounded-[1.5rem] border border-white/10 bg-white/5 backdrop-blur p-6 shadow-soft grid gap-4">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <input class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach" placeholder="Your Name" required />
+          <input class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach" placeholder="Phone / WhatsApp" required />
+        </div>
+        <input type="email" class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach" placeholder="Email" required />
+        <div class="grid sm:grid-cols-2 gap-3">
+          <select class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach">
+            <option>Product</option>
+            <option>Cake</option><option>Brownies</option><option>Cookies</option><option>Tiramisu</option><option>Hamper</option><option>Custom</option>
+          </select>
+          <input class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach" placeholder="Preferred delivery date" />
+        </div>
+        <textarea rows="4" class="rounded-lg px-4 py-3 bg-night/40 border border-white/10 focus:outline-none focus:border-peach" placeholder="Flavour, size, message on cake, address, etc."></textarea>
+        <button class="btn rounded-lg bg-peach text-night px-6 py-3 font-semibold shadow-candy">Place Request</button>
+        <p class="text-xs text-cream/70">We’ll confirm your order on WhatsApp or email within a few hours.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CONTACT
+       ========================================================= -->
+  <section id="contact" class="py-16 md:py-24 relative bg-indigoSoft/40">
+    <div class="absolute inset-0 gridbg opacity-20"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10">
+      <div class="sa">
+        <h2 class="font-display text-3xl md:text-4xl">Let’s Connect</h2>
+        <p class="mt-3 text-cream/90">Bulk orders, festive hampers or collabs—say hi!</p>
+        <ul class="mt-6 text-cream/90 space-y-2">
+          <li>📞 <a class="hover:text-peach" href="tel:+919899985142">+91 9899985142</a></li>
+          <li>📧 <a class="hover:text-peach" href="mailto:chahatgambhir1611@gmail.com">chahatgambhir1611@gmail.com</a></li>
+          <li>📍 New Delhi, India</li>
+        </ul>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="#order" class="btn rounded-full bg-peach text-night px-6 py-3 font-semibold shadow-candy">Order Now</a>
+          <a href="#menu" class="btn rounded-full border border-white/10 px-6 py-3 hover:bg-white/5">Explore Menu</a>
+        </div>
+      </div>
+
+      <div class="sa rounded-[1.5rem] overflow-hidden border border-white/10 shadow-soft">
+        <iframe class="w-full h-full min-h-[320px]" src="https://maps.google.com/maps?q=New%20Delhi&t=&z=10&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="border-t border-white/10 bg-night">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <svg class="h-8 w-8" viewBox="0 0 64 64" aria-hidden="true">
+            <defs><linearGradient id="ff" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC4A4"/><stop offset="1" stop-color="#FF8A4C"/></linearGradient></defs>
+            <path d="M16 38c0-7 8-12 16-12s16 5 16 12v8H16v-8z" fill="url(#ff)" stroke="#FFE7D4" stroke-width="2"/>
+            <circle cx="32" cy="24" r="6" fill="#FFF7EC" stroke="#FFE7D4"/>
+          </svg>
+          <div>
+            <div class="font-display">The Bliss Cakkery</div>
+            <div class="text-xs text-cream/70">Every bite is pure bliss.</div>
+          </div>
+        </div>
+
+        <div class="text-sm text-cream/85 text-center lg:text-right">
+          © <span id="y"></span> The Bliss Cakkery. All rights reserved.
+          <div class="mt-1">
+            <a href="https://www.talentronaut.in/" target="_blank" class="text-peach hover:opacity-90">Designed by Talentronaut Technologies</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       Scripts
+       ========================================================= -->
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', ()=> mobileNav.classList.toggle('open'));
+
+    // Progress + sticky veil
+    const progress = document.getElementById('progress');
+    const header = document.getElementById('nav');
+    addEventListener('scroll', ()=>{
+      const h = document.documentElement, sc = h.scrollTop, max = h.scrollHeight - h.clientHeight;
+      progress.style.width = (sc/max)*100 + '%';
+      header.classList.toggle('scrolled', sc > 10);
+    }, {passive:true});
+
+    // Reveal
+    const io = new IntersectionObserver((entries, obs)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, {threshold:.18, rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.sa').forEach(el => io.observe(el));
+
+    // Smooth anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(!id || id==='#') return;
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // Cupcake background animation (canvas sprites)
+    (function(){
+      const canvas = document.getElementById('cupcakes');
+      if(!canvas || !canvas.getContext) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr = devicePixelRatio || 1;
+      let cupcakes = [];
+      const colors = ["#FFC4A4","#FF8A4C","#FFE9D6","#FFF7EC","#FFD5BD"];
+
+      function resize(){
+        const rect = canvas.getBoundingClientRect();
+        w = canvas.width = rect.width * dpr;
+        h = canvas.height = rect.height * dpr;
+        canvas.style.width = rect.width + "px";
+        canvas.style.height = rect.height + "px";
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.scale(dpr, dpr);
+      }
+
+      function makeCupcake(){
+        const x = Math.random()*canvas.clientWidth;
+        const y = -20 - Math.random()*200;
+        const s = 0.8 + Math.random()*1.6; // scale
+        const speed = 0.3 + Math.random()*0.6;
+        const clr = colors[(Math.random()*colors.length)|0];
+        return {x,y,s,speed,clr, sway: Math.random()*Math.PI*2};
+      }
+
+      function drawCupcake(c){
+        const x = c.x + Math.sin(c.sway)*10;
+        const y = c.y;
+        const s = c.s;
+
+        // Shadow
+        ctx.fillStyle = "rgba(0,0,0,.18)";
+        ctx.beginPath();
+        ctx.ellipse(x, y+24*s, 18*s, 6*s, 0, 0, Math.PI*2);
+        ctx.fill();
+
+        // Base (wrapper)
+        ctx.fillStyle = "#1B2457";
+        ctx.beginPath();
+        ctx.moveTo(x-16*s, y+10*s);
+        ctx.lineTo(x+16*s, y+10*s);
+        ctx.lineTo(x+14*s, y+20*s);
+        ctx.lineTo(x-14*s, y+20*s);
+        ctx.closePath(); ctx.fill();
+
+        // Wrapper lines
+        ctx.strokeStyle = "rgba(255,255,255,.12)";
+        for(let i=-12;i<=12;i+=4){
+          ctx.beginPath(); ctx.moveTo(x+i*s, y+10*s); ctx.lineTo(x+i*s, y+20*s); ctx.stroke();
+        }
+
+        // Frosting
+        ctx.fillStyle = c.clr;
+        ctx.beginPath();
+        ctx.arc(x, y+8*s, 14*s, Math.PI, 0);
+        ctx.arc(x, y+2*s, 12*s, Math.PI, 0);
+        ctx.arc(x, y-4*s, 10*s, Math.PI, 0);
+        ctx.closePath(); ctx.fill();
+
+        // Sprinkle (tiny)
+        ctx.fillStyle = "#fff";
+        for(let i=0;i<4;i++){
+          ctx.fillRect(x-8*s + Math.random()*16*s, y-6*s + Math.random()*10*s, 1.5, 3);
+        }
+
+        // Cherry
+        ctx.fillStyle = "#FF5A5A";
+        ctx.beginPath(); ctx.arc(x, y-8*s, 3*s, 0, Math.PI*2); ctx.fill();
+      }
+
+      function step(){
+        ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+        cupcakes.forEach(c=>{
+          c.y += c.speed;
+          c.sway += 0.01;
+          if(c.y > canvas.clientHeight + 30){ // reset to top
+            Object.assign(c, makeCupcake(), {y: -30});
+          }
+          drawCupcake(c);
+        });
+        requestAnimationFrame(step);
+      }
+
+      function init(){
+        resize();
+        const count = Math.min(36, Math.max(18, Math.floor(canvas.clientWidth/40)));
+        cupcakes = Array.from({length: count}, () => makeCupcake());
+        step();
+      }
+
+      // Start only when hero in view
+      const hero = document.getElementById('home');
+      const obs = new IntersectionObserver((es)=>{
+        es.forEach(e=>{
+          if(e.isIntersecting){ init(); obs.disconnect(); }
+        });
+      },{threshold:.3});
+      obs.observe(hero);
+
+      addEventListener('resize', resize, {passive:true});
+    })();
+  </script>
+</body>
+</html>
